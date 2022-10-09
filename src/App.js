@@ -3,7 +3,7 @@ import SearchWeather from "./SearchWeather";
 
 function App() {
   return (
-    <div>
+    <div className="container">
       <h1>Weather search engine</h1>
       <SearchWeather />
     </div>

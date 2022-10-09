@@ -31,7 +31,7 @@ export default function SearchWeather() {
   }
 
   return (
-    <div className="container">
+    <div>
       <form onSubmit={handleSubmit}>
         <input type="search" placeholder="Type city..." onChange={newCity} />
         <button type="submit">Search</button>
