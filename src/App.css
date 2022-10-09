@@ -1,0 +1,39 @@
+body {
+  background: rgb(212, 212, 251);
+}
+
+h1 {
+  text-align: center;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  margin-top: 50px;
+}
+
+.container {
+  margin-top: 30px;
+}
+
+form {
+  text-align: center;
+  size: 15px;
+}
+
+button {
+  color: #ffff;
+  background-color: rgb(123, 63, 173);
+  border-color: rgb(142, 15, 227);
+}
+
+button:hover {
+  background-color: rgb(207, 186, 239);
+  border-color: rgb(216, 179, 244);
+}
+p {
+  text-align: center;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  font-size: 30px;
+}
+
+.icon {
+  display: flex;
+  justify-content: center;
+}
