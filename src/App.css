@@ -49,3 +49,8 @@ p {
   display: flex;
   justify-content: center;
 }
+
+a {
+  font-size: small;
+  text-align: center;
+}
