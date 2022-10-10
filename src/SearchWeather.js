@@ -27,7 +27,11 @@ export default function SearchWeather() {
         response.data.wind.speed
       )}k/s | Humidity: ${response.data.main.humidity}%`
     );
-    setIcon(showWeather.icon);
+    setIcon(
+      "http://openweathermap.org/img/wn/" +
+        response.data.weather[0].icon +
+        "@2x.png"
+    );
   }
 
   return (
@@ -38,7 +42,7 @@ export default function SearchWeather() {
       </form>
       <p>{message}</p>
       <div className="icon">
-        <img src={weather.icon} alt={weather.description} />
+        <img src={icon} alt={weather.description} />
       </div>
     </div>
   );
