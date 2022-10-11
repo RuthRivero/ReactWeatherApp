@@ -1,5 +1,6 @@
 import React from "react";
-import "./App.css";
+import App from "./App.css";
+import "bootstrap/dist/css/bootstrap.css";
 import Forecast from "./Forecast";
 import SearchWeather from "./SearchWeather";
 
