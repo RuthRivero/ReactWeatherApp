@@ -1,3 +1,4 @@
+import React from "react";
 import "./App.css";
 import Forecast from "./Forecast";
 import SearchWeather from "./SearchWeather";
