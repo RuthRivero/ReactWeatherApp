@@ -1,40 +1,27 @@
 import React from "react";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 
 export default function Forecast() {
   return (
-    <div>
-      <div class="row">
-        <div class="col-sm-2">
-          <div class="day">Sun</div>
-          <div class="day-icon">☀️</div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-sm-2">
-          <div class="day">Mon</div>
-          <div class="day-icon">☀️</div>
-        </div>
-      </div>
-      <div class="col-sm-2">
-        <div class="day">Tue</div>
-        <div class="day-icon">☀️</div>
-      </div>
-      <div class="col-sm-2">
-        <div class="day">Wed</div>
-        <div class="day-icon">☀️</div>
-      </div>
-      <div class="col-sm-2">
-        <div class="day">Thu</div>
-        <div class="day-icon">☀️</div>
-      </div>
-      <div class="col-sm-2">
-        <div class="day">Fri</div>
-        <div class="day-icon">☀️</div>
-      </div>
-      <div class="col-sm-2">
-        <div class="day">Sat</div>
-        <div class="day-icon">☀️</div>
-      </div>
-    </div>
+    <Container>
+      <Row>
+        <Col>
+          <div class="col-sm-2">
+            <div class="day">Sun</div>
+            <div class="day-icon">☀️</div>
+            <div class="temp">12</div>
+          </div>
+        </Col>
+        <Col>
+          <div class="col-sm-2">
+            <div class="day">Mon</div>
+            <div class="day-icon">☀️</div>
+            <div class="temp">12</div>
+          </div>
+        </Col>
+      </Row>
+    </Container>
   );
 }
