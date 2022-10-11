@@ -3,13 +3,12 @@ import "bootstrap/dist/css/bootstrap.css";
 
 export default function Forecast() {
   return (
-    <div>
+    <div class="row">
       <div class="col-sm-2">
         <div class="day">Sun</div>
         <div class="day-icon">☀️</div>
         <div class="temp">12</div>
       </div>
-
       <div class="col-sm-2">
         <div class="day">Mon</div>
         <div class="day-icon">☀️</div>
