@@ -1,9 +1,10 @@
 import React, { useState } from "react";
+import CurrentDate from "./CurrentDate";
 import axios from "axios";
 
 export default function SearchWeather() {
   let [city, setCity] = useState();
-  let [weather, setWeather] = useState({});
+  let [weather, setWeather] = useState();
   let [message, setMessage] = useState();
   let [icon, setIcon] = useState();
   let [wind, setWind] = useState();
@@ -20,6 +21,7 @@ export default function SearchWeather() {
   }
 
   function showWeather(response) {
+    console.log(response);
     setWeather({
       icon: `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`,
       description: response.data.weather[0].description,
@@ -40,6 +42,7 @@ export default function SearchWeather() {
         <input type="search" placeholder="Type city..." onChange={newCity} />
         <button type="submit">Search</button>
       </form>
+      <CurrentDate />
       <h2>{message}</h2>
       <h3>{wind}</h3>
       <h4>{humidity}</h4>
