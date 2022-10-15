@@ -6,6 +6,8 @@ export default function SearchWeather() {
   let [weather, setWeather] = useState({});
   let [message, setMessage] = useState();
   let [icon, setIcon] = useState();
+  let [wind, setWind] = useState();
+  let [humidity, setHumidity] = useState();
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -22,11 +24,9 @@ export default function SearchWeather() {
       icon: `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`,
       description: response.data.weather[0].description,
     });
-    setMessage(
-      `It is ${Math.round(response.data.main.temp)} °C | Wind: ${Math.round(
-        response.data.wind.speed
-      )}k/s | Humidity: ${response.data.main.humidity}%`
-    );
+    setMessage(`${Math.round(response.data.main.temp)} °C`);
+    setWind(`Wind: ${Math.round(response.data.wind.speed)}k/s`);
+    setHumidity(`Humidity: ${response.data.main.humidity}%`);
     setIcon(
       "http://openweathermap.org/img/wn/" +
         response.data.weather[0].icon +
@@ -40,7 +40,9 @@ export default function SearchWeather() {
         <input type="search" placeholder="Type city..." onChange={newCity} />
         <button type="submit">Search</button>
       </form>
-      <p>{message}</p>
+      <h2>{message}</h2>
+      <h3>{wind}</h3>
+      <h4>{humidity}</h4>
       <div className="icon">
         <img src={icon} alt={weather.description} />
       </div>
