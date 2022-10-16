@@ -1,8 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 
-export default function CurrentDate(response) {
-  let [date, setDate] = useState();
-  setDate(response.data.dt * 1000);
+export default function CurrentDate(props) {
   let days = [
     "Sunday",
     "Monday",
@@ -12,15 +10,15 @@ export default function CurrentDate(response) {
     "Friday",
     "Saturday",
   ];
-  let day = days[response.date.getDate()];
-  let hours = response.date.getHours();
-  let minutes = response.date.getMinutes();
+  let day = days[props.date.getDay()];
+  let hours = props.date.getHours();
+  let minutes = props.date.getMinutes();
   if (minutes < 10) {
     minutes = `0${minutes}`;
   }
   return (
     <div>
-      {date} {day} {hours}:{minutes}
+      {day} {hours}:{minutes}
     </div>
   );
 }

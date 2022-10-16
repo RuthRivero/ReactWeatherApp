@@ -1,14 +1,15 @@
 import React, { useState } from "react";
-import CurrentDate from "./CurrentDate";
 import axios from "axios";
+import CurrentDate from "./CurrentDate";
 
-export default function SearchWeather() {
+export default function SearchWeather(props) {
   let [city, setCity] = useState();
-  let [weather, setWeather] = useState();
+  let [weather, setWeather] = useState({ icon: "", description: "" });
   let [message, setMessage] = useState();
-  let [icon, setIcon] = useState();
+  let [icon, setIcon] = useState({});
   let [wind, setWind] = useState();
   let [humidity, setHumidity] = useState();
+  let [today, setToday] = useState(new Date());
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -21,13 +22,13 @@ export default function SearchWeather() {
   }
 
   function showWeather(response) {
-    console.log(response);
     setWeather({
       icon: `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`,
       description: response.data.weather[0].description,
     });
+    setToday(new Date(response.data.dt * 1000));
     setMessage(`${Math.round(response.data.main.temp)} °C`);
-    setWind(`Wind: ${Math.round(response.data.wind.speed)}k/s`);
+    setWind(`Wind: ${Math.round(response.data.wind.speed)}km/h`);
     setHumidity(`Humidity: ${response.data.main.humidity}%`);
     setIcon(
       "http://openweathermap.org/img/wn/" +
@@ -42,7 +43,7 @@ export default function SearchWeather() {
         <input type="search" placeholder="Type city..." onChange={newCity} />
         <button type="submit">Search</button>
       </form>
-      <CurrentDate />
+      <CurrentDate date={today} />
       <h2>{message}</h2>
       <h3>{wind}</h3>
       <h4>{humidity}</h4>
