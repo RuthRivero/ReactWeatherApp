@@ -46,11 +46,13 @@ export default function SearchWeather(props) {
       </form>
       <CurrentDate date={today} />
       <WeatherTemperature celsius={celsius} />
-      <h3>{wind}</h3>
-      <h4>{humidity}</h4>
       <div className="icon">
         <img src={icon} alt={weather.description} />
       </div>
+      <span>
+        <h3>{wind}</h3>
+        <h4>{humidity}</h4>
+      </span>
     </div>
   );
 }
