@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import axios from "axios";
 import CurrentDate from "./CurrentDate";
+import WeatherTemperature from "./WeatherTemperature";
 
 export default function SearchWeather(props) {
   let [city, setCity] = useState();
   let [weather, setWeather] = useState({ icon: "", description: "" });
-  let [message, setMessage] = useState();
+  let [celsius, setCelsius] = useState(0);
   let [icon, setIcon] = useState({});
   let [wind, setWind] = useState();
   let [humidity, setHumidity] = useState();
@@ -27,7 +28,7 @@ export default function SearchWeather(props) {
       description: response.data.weather[0].description,
     });
     setToday(new Date(response.data.dt * 1000));
-    setMessage(`${Math.round(response.data.main.temp)} °C`);
+    setCelsius(Math.round(response.data.main.temp));
     setWind(`Wind: ${Math.round(response.data.wind.speed)}km/h`);
     setHumidity(`Humidity: ${response.data.main.humidity}%`);
     setIcon(
@@ -44,7 +45,7 @@ export default function SearchWeather(props) {
         <button type="submit">Search</button>
       </form>
       <CurrentDate date={today} />
-      <h2>{message}</h2>
+      <WeatherTemperature celsius={celsius} />
       <h3>{wind}</h3>
       <h4>{humidity}</h4>
       <div className="icon">
