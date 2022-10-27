@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import CurrentDate from "./CurrentDate";
 import WeatherTemperature from "./WeatherTemperature";
+import Forecast from "./Forecast";
 
 export default function SearchWeather(props) {
   let [city, setCity] = useState();
@@ -11,6 +12,7 @@ export default function SearchWeather(props) {
   let [wind, setWind] = useState();
   let [humidity, setHumidity] = useState();
   let [today, setToday] = useState(new Date());
+  let [coords, setCoords] = useState({});
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -31,6 +33,7 @@ export default function SearchWeather(props) {
     setCelsius(Math.round(response.data.main.temp));
     setWind(`Wind: ${Math.round(response.data.wind.speed)}km/h`);
     setHumidity(`Humidity: ${response.data.main.humidity}%`);
+    setCoords(response.data.coord);
     setIcon(
       "http://openweathermap.org/img/wn/" +
         response.data.weather[0].icon +
@@ -53,6 +56,7 @@ export default function SearchWeather(props) {
         <h3>{wind}</h3>
         <h4>{humidity}</h4>
       </span>
+      <Forecast coordinates={coords} />
     </div>
   );
 }

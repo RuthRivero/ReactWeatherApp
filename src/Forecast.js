@@ -1,34 +1,32 @@
-import React from "react";
+import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.css";
+import axios from "axios";
+import WeatherForecastDay from "./WeatherForecastDay";
 
-export default function Forecast() {
-  return (
-    <div className="row">
-      <div className="col-sm-2">
-        <div className="day">Sun</div>
-        <div className="high">H 12</div>
-        <div className="low">L 5</div>
+export default function Forecast(props) {
+  let [loaded, setLoaded] = useState(false);
+  let [forecast, setForecast] = useState(null);
+
+  function handleResponse(response) {
+    console.log(response);
+    setForecast(response.data.daily);
+    setLoaded(true);
+  }
+
+  if (loaded) {
+    return (
+      <div className="row">
+        <div className="col-sm-2">
+          <WeatherForecastDay data={forecast[0]} />
+        </div>
       </div>
-      <div className="col-sm-2">
-        <div className="day">Mon</div>
-        <div className="high">H 12</div>
-        <div className="low">L 5</div>
-      </div>
-      <div className="col-sm-2">
-        <div className="day">Tue</div>
-        <div className="high">H 12</div>
-        <div className="low">L 5</div>
-      </div>
-      <div className="col-sm-2">
-        <div className="day">Wed</div>
-        <div className="high">H 12</div>
-        <div className="low">L 5</div>
-      </div>
-      <div className="col-sm-2">
-        <div className="day">Thu</div>
-        <div className="high">H 12</div>
-        <div className="low">L 5</div>
-      </div>
-    </div>
-  );
+    );
+  } else {
+    let apiKey = "bb0d4750adbaf8dd371419162d9174d1";
+    let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${props.coordinates.lat}&lon=${props.coordinates.lon}&appid=${apiKey}&units=metric`;
+
+    axios.get(apiUrl).then(handleResponse);
+
+    return null;
+  }
 }
