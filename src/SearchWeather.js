@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import CurrentDate from "./CurrentDate";
 import WeatherTemperature from "./WeatherTemperature";
 import Forecast from "./Forecast";
 
 export default function SearchWeather(props) {
-  let [city, setCity] = useState();
+  let [city, setCity] = useState("Madrid");
   let [weather, setWeather] = useState({ icon: "", description: "" });
   let [celsius, setCelsius] = useState(0);
   let [icon, setIcon] = useState({});
@@ -13,15 +13,21 @@ export default function SearchWeather(props) {
   let [humidity, setHumidity] = useState();
   let [today, setToday] = useState(new Date());
   let [coords, setCoords] = useState({});
+  let [loaded, setLoaded] = useState(true);
+
+  useEffect(() => {
+    setLoaded(false);
+  }, [city]);
 
   function handleSubmit(event) {
     event.preventDefault();
-    let url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=bb0d4750adbaf8dd371419162d9174d1&units=metric`;
-    axios.get(url).then(showWeather);
+    setCity(event.target.children.item(0).value);
+    search();
   }
 
-  function newCity(event) {
-    setCity(event.target.value);
+  function search() {
+    let url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=bb0d4750adbaf8dd371419162d9174d1&units=metric`;
+    axios.get(url).then(showWeather);
   }
 
   function showWeather(response) {
@@ -39,24 +45,29 @@ export default function SearchWeather(props) {
         response.data.weather[0].icon +
         "@2x.png"
     );
+    setLoaded(true);
   }
 
-  return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <input type="search" placeholder="Type city..." onChange={newCity} />
-        <button type="submit">Search</button>
-      </form>
-      <CurrentDate date={today} />
-      <WeatherTemperature celsius={celsius} />
-      <div className="icon">
-        <img src={icon} alt={weather.description} />
+  if (loaded) {
+    return (
+      <div>
+        <form onSubmit={handleSubmit}>
+          <input type="search" placeholder="Type city..." />
+          <button type="submit">Search</button>
+        </form>
+        <CurrentDate date={today} />
+        <WeatherTemperature celsius={celsius} />
+        <div className="icon">
+          <img src={icon} alt={weather.description} />
+        </div>
+        <span>
+          <h3>{wind}</h3>
+          <h4>{humidity}</h4>
+        </span>
+        <Forecast coordinates={coords} />
       </div>
-      <span>
-        <h3>{wind}</h3>
-        <h4>{humidity}</h4>
-      </span>
-      <Forecast coordinates={coords} />
-    </div>
-  );
+    );
+  } else {
+    search();
+  }
 }
